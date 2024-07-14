@@ -52,6 +52,7 @@ and you could use the api_url as base_url to test the api and you could check re
 > Test get current weather by city(sydney) and get history weather by city(sydney). dt is the timestamp, Timestamp (Unix time, UTC time zone), e.g. dt=1586468027. Data is available from January 1st, 1979 till 4 days ahead
 ```bash
 $ curl -X GET "https://0ueye50sil.execute-api.ap-southeast-2.amazonaws.com/dev/weather/sydney"
-$ curl -X GET "https://0ueye50sil.execute-api.ap-southeast-2.amazonaws.com/dev/weather/history/sydney?dt=dt=1643803200"
+$ curl -X GET \
+"https://0ueye50sil.execute-api.ap-southeast-2.amazonaws.com/dev/weather/history/sydney?dt=1643803200"
 ```
 
