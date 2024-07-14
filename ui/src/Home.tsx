@@ -47,6 +47,7 @@ const Home: React.FC = () => {
       message.error('Please enter a city name.');
       return;
     }
+    setWeatherData(null);
     setLoading(true);
     try {
       const response = await axios.get(`${API_URL}/weather/${city}`);
@@ -65,6 +66,7 @@ const Home: React.FC = () => {
       message.error('Please enter a city name and select date.');
       return;
     }
+    setHistoryWeatherData(null);
     setLoading(true);
     try {
       const response = await axios.get(`${API_URL}/weather/history/${city}?dt=${selectedDate.utc().unix()}`);
