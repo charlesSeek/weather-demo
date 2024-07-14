@@ -1,0 +1,41 @@
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+crash.*.log
+
+# Plan files
+*.tfplan
+
+# Terraform variable files
+*.tfvars
+*.tfvars.json
+
+# Terraform override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Environment variables
+.env
+
+# Ignore any archive files
+*.zip
+*.tar.gz
+
+# Ignore editor-specific files
+.vscode/
+.idea/
+*.swp
+
+# Node modules (if using JavaScript/TypeScript for Lambda functions or other scripts)
+node_modules/
+
+# Log files
+*.log

@@ -1,0 +1,31 @@
+{
+  "name": "weather-api",
+  "version": "1.0.0",
+  "description": "weather api",
+  "scripts": {
+    "build": "tsc",
+    "zip": "zip -r ../lambda_get_weather_by_city.zip dist/get_weather_by_city.js dist/utils.js node_modules && zip -r ../lambda_get_history_weather_by_city.zip dist/get_history_weather_by_city.js dist/utils.js node_modules",
+    "package": "yarn build && yarn zip",
+    "test": "jest"
+  },
+  "author": "shuchengc",
+  "license": "ISC",
+  "engines" : { 
+    "npm" : ">=8.0.0",
+    "node" : ">=18.0.0"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.614.0",
+    "aws-sdk": "^2.1659.0",
+    "axios": "^1.7.2"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.141",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.14.10",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.2",
+    "typescript": "^5.5.3"
+  }
+}
+
