@@ -56,3 +56,26 @@ $ curl -X GET \
 "https://0ueye50sil.execute-api.ap-southeast-2.amazonaws.com/dev/weather/history/sydney?dt=1643803200"
 ```
 
+## UI(FE)
+
+**Install dependencies**
+```bash
+$ cd ui
+$ yarn
+```
+
+**Set up environment**
+```bash
+$ cp .env.example .env
+```
+> You could use my deployed dev stage API or configur your API.
+
+**Start APP locally**
+```bash
+$ yarn start
+```
+> http://localhost:3000, You could switch current weather and history weather tabs and retrieve weather data.
+
+## TBD
+we could add unit tests for UI and also add CI/CD for the repo in the future.
+
