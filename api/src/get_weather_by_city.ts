@@ -15,15 +15,19 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
   console.log('Received event:', JSON.stringify(event, null, 2));
 
   const bucketName = process.env.BUCKET_NAME;
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Header': 'Content-Type',
+    'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
+    'Content-Type': 'application/json',
+  }
 
   // Extract the city parameter from the pathParameters
   const city = event.pathParameters?.city;
   if (!city) {
     return {
       statusCode: 400,
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers,
       body: JSON.stringify({ error: 'City parameter is required' }),
     };
   }
@@ -33,9 +37,7 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
   if (!apiKey) {
     return {
       statusCode: 400,
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers,
       body: JSON.stringify({ error: 'Missing weather api key in environment' }),
     };
   }
@@ -45,9 +47,7 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
     if (!coordinate) {
       return {
         statusCode: 500,
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers,
         body: JSON.stringify({ error: 'invoke coordinate api error.' }),
       };
     }
@@ -56,9 +56,7 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
     if (!weather) {
       return {
         statusCode: 500,
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers,
         body: JSON.stringify({ error: 'invoke current weather api error.' }),
       };
     }
@@ -82,18 +80,14 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
 
     return {
       statusCode: 200,
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers,
       body: JSON.stringify(responseBody),
     };
   } catch (error) {
     console.error('Error occurred:', error);
     return {
       statusCode: 500,
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers,
       body: JSON.stringify({ error: 'Internal Server Error' }),
     };
   }

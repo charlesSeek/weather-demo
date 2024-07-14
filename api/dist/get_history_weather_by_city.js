@@ -8,14 +8,18 @@ const handler = async (event) => {
     var _a, _b;
     console.log('Received event:', JSON.stringify(event, null, 2));
     const bucketName = process.env.BUCKET_NAME;
+    const headers = {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Header': 'Content-Type',
+        'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
+        'Content-Type': 'application/json',
+    };
     // Extract the city parameter from the query parameters
     const city = (_a = event.pathParameters) === null || _a === void 0 ? void 0 : _a.city;
     if (!city) {
         return {
             statusCode: 400,
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers,
             body: JSON.stringify({ error: 'City parameter is required' }),
         };
     }
@@ -24,9 +28,7 @@ const handler = async (event) => {
     if (!apiKey) {
         return {
             statusCode: 400,
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers,
             body: JSON.stringify({ error: 'Missing weather api key in environment' }),
         };
     }
@@ -40,9 +42,7 @@ const handler = async (event) => {
         if (!coordinate) {
             return {
                 statusCode: 500,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers,
                 body: JSON.stringify({ error: 'invoke coordinate api error.' }),
             };
         }
@@ -50,9 +50,7 @@ const handler = async (event) => {
         if (!weather) {
             return {
                 statusCode: 500,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers,
                 body: JSON.stringify({ error: 'invoke history weather api error.' }),
             };
         }
@@ -69,9 +67,7 @@ const handler = async (event) => {
         await s3.send(new client_s3_1.PutObjectCommand(putObjectParams));
         return {
             statusCode: 200,
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers,
             body: JSON.stringify(responseBody),
         };
     }
@@ -79,9 +75,7 @@ const handler = async (event) => {
         console.error('Error occurred:', error);
         return {
             statusCode: 500,
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers,
             body: JSON.stringify({ error: 'Internal Server Error' }),
         };
     }
